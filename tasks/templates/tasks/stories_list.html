@@ -1,0 +1,239 @@
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+
+		<!-- Meta data -->
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+		<meta content="zendash - dashboard" name="description">
+		<meta content="Spruko Technologies Private Limited" name="author">
+		<meta name="keywords" content="admin, bootstrap admin template, bootstrap dashboard, dashboard, panel, simple dashboard html template, dashboard template bootstrap 4, simple admin panel template, bootstrap 4 admin dashboard, html css dashboard template, themeforest admin template, premium bootstrap template, admin panel html template, admin template design, dark admin template, admin dashboard ui, css admin template, cool admin template, nice admin template"/>
+
+		<!-- Title -->
+		<title>Lista de historias</title>
+
+		<!--Favicon -->
+		<link rel="icon" href="{% static 'tasks/images/brand/favicon.ico' %}" type="image/x-icon"/>
+
+		<!-- Bootstrap css -->
+		<link href="{% static 'tasks/plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+
+		<!-- Style css -->
+		<link href="{% static 'tasks/css/style.css' %}" rel="stylesheet" />
+
+		<!-- Dark css -->
+		<link href="{% static 'tasks/css/dark.css' %}" rel="stylesheet" />
+
+		<!-- Skins css -->
+		<link href="{% static 'tasks/css/skins.css' %}" rel="stylesheet" />
+
+		<!-- Animate css -->
+		<link href="{% static 'tasks/css/animated.css' %}" rel="stylesheet" />
+
+		<!--Sidemenu css -->
+        <link href="{% static 'tasks/css/sidemenu.css' %}" rel="stylesheet">
+
+		<!-- P-scroll bar css-->
+		<link href="{% static 'tasks/plugins/p-scrollbar/p-scrollbar.css' %}" rel="stylesheet" />
+
+		<!---Icons css-->
+		<link href="{% static 'tasks/css/icons.css' %}" rel="stylesheet" />
+
+		<!-- INTERNAl Select2 css -->
+		<link href="{% static 'tasks/plugins/select2/select2.min.css' %}" rel="stylesheet" />
+
+		<!-- INTERNAL Morris Charts css -->
+		<link href="{% static 'tasks/plugins/morris/morris.css' %}" rel="stylesheet" />
+
+		<!-- INTERNAL Data table css -->
+		<link href="{% static 'tasks/plugins/datatable/dataTables.bootstrap4.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'tasks/plugins/datatable/css/buttons.bootstrap4.min.css' %}"  rel="stylesheet">
+		<link href="{% static 'tasks//plugins/datatable/responsive.bootstrap4.min.css' %}" rel="stylesheet" />
+
+	</head>
+
+    <body class="app sidebar-mini">
+
+		<!---Global-loader-->
+		<div id="global-loader" >
+			<img src="{% static 'tasks/images/svgs/loader.svg' %}" alt="loader">
+		</div>
+		<!---/Global-loader-->
+
+		<!-- Page -->
+		<div class="page">
+			<div class="page-main">
+            <!--aside open-->
+            {% include "tasks/menu.html" %}
+            <!--aside closed-->
+
+                <div class="app-content">
+                    <div class="side-app">
+                <!--app header-->
+                {% include "tasks/header.html" %}
+                <!--/app header-->
+
+                <!--Page header-->
+						<div class="page-header">
+							<div class="page-leftheader">
+								<!-- <h4 class="page-title">Trips Dashboard</h4> -->
+							</div>
+						</div>
+                <!--End Page header-->
+                <!-- Row -->
+						<div class="row">
+							<div class="col-12">
+                                <!--div-->
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title">Hisotrias de usuario</div>
+									</div>
+									<div class="card-body">
+										<div class="">
+											<div class="table-responsive">
+												<table id="example" class="table table-bordered text-nowrap key-buttons">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Proyecto</th>
+															<th class="border-bottom-0">Nombre historia de usuario</th>
+															<th class="border-bottom-0">Total horas estimadas frond-end</th>
+															<th class="border-bottom-0">Total horas estimadas back-end</th>
+															<th class="border-bottom-0">Total horas estimadas app</th>	
+															<th class="border-bottom-0">Total horas estimadas</th>	
+															<th class="border-bottom-0">Total horas trabajadas frond-end</th>
+															<th class="border-bottom-0">Total horas trabajadas back-end</th>
+															<th class="border-bottom-0">Total hoaras trabajadas app</th>															
+                                                            <th class="border-bottom-0 text-center">Acción</th>
+														</tr>
+													</thead>
+													<tbody>
+                                                        {% for s in stories %}
+														<tr>
+															<td>{{s.project.project_name}}</td>
+															<td>{{s.user_story_name}}</td>
+															<td>{{s.total_hours_frontend_estimated}}</td>
+															<td>{{s.total_hours_backend_estimated}}</td>
+															<td>{{s.total_hours_app_estimated}}</td>
+															<td>{{s.total_hours_estimated}}</td>
+															<td>{{s.total_hours_frontend_worked}}</td>
+															<td>{{s.total_hours_backend_worked}}</td>
+															<td>{{s.total_hours_app_worked}}</td>
+															<td class="text-center">                                                                                               													                                                              
+                                                                <div class="dropdown">
+                                                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" style="width:40px; height: 25px;">
+                                                                        <i class="fa fa-wrench" style="font-size: 12px;  vertical-align: 15px;"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item text-success" href="">Editar</a>                                                                                                                                   
+                                                                    </div>
+                                                                </div> 
+                                                            </td>                                                            
+														</tr>	
+                                                        {% endfor %}													
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--/div-->
+                            </div>
+						</div>
+						<!-- /Row -->
+
+					</div>
+				</div><!-- end app-content-->
+			</div>
+            <!--Footer-->
+			{% include "tasks/footer.html" %}
+			<!-- End Footer-->
+        </div>
+        <!-- Back to top -->
+		<a href="#top" id="back-to-top"><i class="fe fe-arrow-up"></i></a>
+
+		<!-- Jquery js-->
+		<script src="{% static 'tasks/js/jquery-3.5.1.min.js' %}"></script>
+
+		<!-- Bootstrap4 js-->
+		<script src="{% static 'tasks/plugins/bootstrap/popper.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<!--Othercharts js-->
+		<script src="{% static 'tasks/plugins/othercharts/jquery.sparkline.min.js' %}"></script>
+
+		<!-- Circle-progress js-->
+		<script src="{% static 'tasks/js/circle-progress.min.js' %}"></script>
+
+		<!-- Jquery-rating js-->
+		<script src="{% static 'tasks/plugins/rating/jquery.rating-stars.js' %}"></script>
+
+		<!--Sidemenu js-->
+		<script src="{% static 'tasks/plugins/sidemenu/sidemenu.js' %}"></script>
+
+		<!-- P-scroll js-->
+		<script src="{% static 'tasks/plugins/p-scrollbar/p-scrollbar.js' %}"></script>
+		<script src="{% static 'tasks/plugins/p-scrollbar/p-scroll1.js' %}"></script>
+
+		<!-- INTERNAL ECharts js -->
+		<script src="{% static 'tasks/plugins/echarts/echarts.js' %}"></script>
+
+		<!-- Peitychart js-->
+		<script src="{% static 'tasks/plugins/peitychart/jquery.peity.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/peitychart/peitychart.init.js' %}"></script>
+
+		<!--INTERNAL  Apexchart js-->
+		<script src="{% static 'tasks/js/apexcharts.js' %}"></script>
+
+		<!--Moment js-->
+		<script src="{% static 'tasks/plugins/moment/moment.js' %}"></script>
+
+		<!-- INTERNAL Data tables js-->
+		<script src="{% static 'tasks/plugins/datatable/js/jquery.dataTables.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/dataTables.bootstrap4.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/dataTables.buttons.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/buttons.bootstrap4.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/jszip.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/pdfmake.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/vfs_fonts.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/buttons.html5.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/buttons.print.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/js/buttons.colVis.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/dataTables.responsive.min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/datatable/responsive.bootstrap4.min.js' %}"></script>
+		<script src="{% static 'tasks/js/datatables.js' %}"></script>
+        
+
+		<!--INTERNAL Select2 js -->
+		<script src="{% static 'tasks/plugins/select2/select2.full.min.js' %}"></script>
+
+		<!--INTERNAL Morris Charts js -->
+		<script src="{% static 'tasks/plugins/morris/raphael-min.js' %}"></script>
+		<script src="{% static 'tasks/plugins/morris/morris.js' %}"></script>
+
+		<!--INTERNAL Chart js -->
+		<script src="{% static 'tasks/plugins/chart/chart.bundle.js' %}"></script>
+		<script src="{% static 'tasks/plugins/chart/custom-chart.js' %}"></script>
+
+		<!-- INTERNAL Index js-->
+		<script src="{% static 'tasks/js/index1.js' %}"></script>
+
+		<!-- Loader js-->
+		<script src="{% static 'tasks/js/loader.js' %}"></script>
+
+		<!-- Custom js-->
+		<script src="{% static 'tasks/js/custom.js' %}"></script>
+		<script>
+            $(document).ready(function() {
+                var status = '{{status}}';
+                var msg = '{{msg}}';     
+                if(status == 'ok'){
+                    $("#body-success-modal").append(msg); 
+                    $('#success-modal').modal('show');
+                }                 
+            });
+        </script>
+	</body>
+{% include "tasks/success.html" %}
+</html>
