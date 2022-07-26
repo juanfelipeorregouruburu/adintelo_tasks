@@ -89,13 +89,27 @@ WSGI_APPLICATION = 'control_tasks.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'tasks',
+#         'USER': 'root',
+#         'PASSWORD': 'Estige1981',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
         'NAME': 'tasks',
-        'USER': 'root',
-        'PASSWORD': 'Estige1981',
-        'HOST': '127.0.0.1',
+        'USER': 'adin_transelca',
+        'PASSWORD': 'Adintello20201',
+        'HOST': 'adintelo-db.cpva49myawem.us-east-2.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
@@ -145,7 +159,7 @@ EMAIL_HOST_PASSWORD = 'vfKUNMDYq1OzG03R'
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
