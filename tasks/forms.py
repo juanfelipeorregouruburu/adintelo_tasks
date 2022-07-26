@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from tasks.models import *
 User._meta.get_field('email')._unique = True
 
-from PIL import Image
-from django.core.files import File
-
 
 
 class SignUpForm(UserCreationForm):
