@@ -143,7 +143,7 @@ class TasksList(TemplateView):
 def createCollaborator(request):   
     try:
         with transaction.atomic():
-            if request.user.is_authenticated:
+            if request.user.is_authenticated and request.user.is_superuser:
                 if request.method == 'POST':
                     data = request.POST
                     password = request.POST.get('password')
@@ -175,7 +175,7 @@ def createCollaborator(request):
 class CollaboratorList(TemplateView):
     def get(self, request):
         try:
-            if request.user.is_authenticated:
+            if request.user.is_authenticated and request.user.is_superuser:
                 collaborators = Collaborator.objects.all()
                 return render(request, 'tasks/collaborators_list.html', {'collaborators':collaborators})
             else:
@@ -189,7 +189,7 @@ class CollaboratorList(TemplateView):
 def createProject(request):   
     try:
         with transaction.atomic():
-            if request.user.is_authenticated:
+            if request.user.is_authenticated and request.user.is_superuser:
                 if request.method == 'POST':
                     data = request.POST
                     form = ProjectsForm(request.POST)
@@ -215,7 +215,7 @@ def createProject(request):
 class ProjectList(TemplateView):
     def get(self, request):
         try:
-            if request.user.is_authenticated:
+            if request.user.is_authenticated and request.user.is_superuser:
                 projects = Project.objects.all()
                 return render(request, 'tasks/projects_list.html', {'projects':projects})
             else:
