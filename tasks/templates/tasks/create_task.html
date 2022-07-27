@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form method="post" enctype='multipart/form-data' onsubmit="myButton.disabled = true; return true;">
+                                    <form method="post" enctype='multipart/form-data' id="task_form" data-cities-url="{% url 'ajax_load_stories' %}" onsubmit="myButton.disabled = true; return true;">
                                         {% csrf_token %}
                                         <div class="row">                                     
                                             <div class="col-sm-4 col-md-4">
@@ -127,7 +127,11 @@
 											<div class="col-sm-4 col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label">Historia</label>
-                                                    {% render_field form.user_story class="form-control"%}
+                                                    <select name="id_story" id="id_story" class="form-control">
+                                                        {% for story in stories %}
+                                                        <option value="{{ story.id }}">{{ story.user_story_name}}</option>
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 col-md-4">
@@ -287,6 +291,26 @@
 
 		<!-- Custom js-->
 		<script src="{% static 'tasks/js/custom.js' %}"></script>
+		<script>
+			$(document).ready(function(){
+				$("#id_project").change(function () {
+					var url = $("#task_form").attr("data-cities-url");  // get the url of the `load_cities` view
+					var story_id = $(this).val();  // get the selected country ID from the HTML input
+			
+					$.ajax({                       // initialize an AJAX request
+					url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+					data: {
+						'project': story_id       // add the country id to the GET parameters
+					},
+					success: function (data) {   // `data` is the return of the `load_cities` view function
+					console.log(data);
+						$("#id_story").html(data);  // replace the contents of the city input with the data that came from the server
+					}
+					});
+			
+				});
+			});
+			</script>
         <script>
             $(document).ready(function() {
                 

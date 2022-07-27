@@ -12,7 +12,10 @@ import traceback
 from django.db import transaction
 from django.contrib.auth.forms import AuthenticationForm
 
-
+def load_stories(request):
+    project_id = request.GET.get('project')
+    stories = UserStorie.objects.filter(project_id = project_id)
+    return render(request, 'tasks/story_list_options.html', {'stories': stories})
 
 def get_fecha_hora():
     fmt = "%Y-%m-%d %H:%M:%S"
@@ -64,6 +67,7 @@ def createStory(request):
                         storie.date_time = get_fecha_hora()
                         storie.project_id = project_id
                         storie.collaborator_who_estimated = request.user
+                        storie.total_hours_estimated = str(int(storie.total_hours_frontend_estimated) + int(storie.total_hours_backend_estimated) + int(storie.total_hours_app_estimated))
                         storie.save()
                         form = UserStorieForm()
                         msg = "La historia de usuario se creó correctamente"
@@ -102,7 +106,7 @@ def createTask(request):
                 if request.method == 'POST':
                     data = request.POST
                     project_id = request.POST.get('project')
-                    storie_id = request.POST.get('user_story')
+                    storie_id = data['id_story']
                     form = WorkReportForm(request.POST)
                     if form.is_valid():
                         task = form.save()
@@ -111,6 +115,11 @@ def createTask(request):
                         task.user_story_id = storie_id
                         task.collaborator = request.user
                         task.save()
+                        story = UserStorie.objects.get(id=storie_id)
+                        story.total_hours_frontend_worked = str(int(story.total_hours_frontend_worked) + int(task.hours_devoted_frontend))
+                        story.total_hours_backend_worked = str(int(story.total_hours_backend_worked) + int(task.hours_devoted_backend))
+                        story.total_hours_app_worked = str(int(story.total_hours_app_worked) + int(task.hours_devoted_app))
+                        story.save()
                         form = WorkReportForm()
                         msg = "La tarea se creó correctamente"
                         return render(request, 'tasks/create_task.html', {'form': form, "status":"ok",'msg':msg}) 

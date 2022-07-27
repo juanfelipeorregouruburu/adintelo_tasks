@@ -30,7 +30,8 @@ class UserStorieForm(forms.ModelForm):
 
     class Meta:
         model = UserStorie
-        fields = ('user_story_name','total_hours_frontend_estimated','total_hours_backend_estimated','total_hours_app_estimated','total_hours_estimated','total_hours_frontend_worked','total_hours_backend_worked', 'total_hours_app_worked')
+        fields = ('user_story_name','total_hours_frontend_estimated','total_hours_backend_estimated','total_hours_app_estimated')
+        #fields = ('user_story_name','total_hours_frontend_estimated','total_hours_backend_estimated','total_hours_app_estimated','total_hours_estimated','total_hours_frontend_worked','total_hours_backend_worked', 'total_hours_app_worked')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -39,7 +40,6 @@ class UserStorieForm(forms.ModelForm):
 
 class WorkReportForm(forms.ModelForm):
     project = forms.ChoiceField()
-    user_story = forms.ChoiceField()
 
     class Meta:
         model = WorkReport
@@ -48,7 +48,6 @@ class WorkReportForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["project"] = forms.ChoiceField(choices=[(choice.id, choice.project_name) for choice in Project.objects.all()])
-        self.fields["user_story"] = forms.ChoiceField(choices=[(choice.id, choice.user_story_name) for choice in UserStorie.objects.all()])
 
 
 class CollaboratorsForm(forms.ModelForm):
@@ -61,7 +60,8 @@ class CollaboratorsForm(forms.ModelForm):
 class ProjectsForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('project_name','total_hours_frontend_estimated','total_hours_backend_estimated','total_hours_app_estimated','total_hours_estimated', 'total_hours_frontend_worked','total_hours_backend_worked','total_hours_app_worked')
+        fields = ('project_name',)
+        #fields = ('project_name','total_hours_frontend_estimated','total_hours_backend_estimated','total_hours_app_estimated','total_hours_estimated', 'total_hours_frontend_worked','total_hours_backend_worked','total_hours_app_worked')
 
 
 

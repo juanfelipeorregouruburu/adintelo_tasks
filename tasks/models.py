@@ -32,9 +32,9 @@ class UserStorie(models.Model):
     total_hours_backend_estimated = models.CharField(max_length=5, blank=True, null=True)
     total_hours_app_estimated = models.CharField(max_length=5, blank=True, null=True)
     total_hours_estimated = models.CharField(max_length=5, blank=True, null=True)
-    total_hours_frontend_worked = models.CharField(max_length=5, blank=True, null=True)
-    total_hours_backend_worked = models.CharField(max_length=90,blank=True, null=True)
-    total_hours_app_worked = models.CharField(max_length=90,blank=True, null=True)
+    total_hours_frontend_worked = models.CharField(max_length=5, default='0')
+    total_hours_backend_worked = models.CharField(max_length=5, default='0')
+    total_hours_app_worked = models.CharField(max_length=5, default='0')
     collaborator_who_estimated = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='estimated')#usuario logueado
     collaborator_who_developed = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='developed')
     date_time = models.CharField(max_length=90,blank=True, null=True)

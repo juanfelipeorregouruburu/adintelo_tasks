@@ -15,4 +15,5 @@ urlpatterns = [
     path('collaborator_list/', CollaboratorList.as_view(), name='collaborator_list'),
     path('create_project', core_views.createProject, name='create_project'),
     path('project_list/', ProjectList.as_view(), name='project_list'),
+    path('ajax/load-stories/', core_views.load_stories, name='ajax_load_stories'), 
 ]
