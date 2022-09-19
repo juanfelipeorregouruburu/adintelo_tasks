@@ -61,6 +61,7 @@ def createStory(request):
                 if request.method == 'POST':
                     data = request.POST
                     project_id = request.POST.get('project')
+                    assignation_date = request.POST.get('assignation_date')
                     form = UserStorieForm(request.POST)
                     if form.is_valid():
                         storie = form.save()
@@ -68,6 +69,7 @@ def createStory(request):
                         storie.project_id = project_id
                         storie.collaborator_who_estimated = request.user
                         storie.total_hours_estimated = str(int(storie.total_hours_frontend_estimated) + int(storie.total_hours_backend_estimated) + int(storie.total_hours_app_estimated))
+                        storie.history_date_time = assignation_date
                         storie.save()
                         form = UserStorieForm()
                         msg = "La historia de usuario se creó correctamente"

@@ -37,6 +37,7 @@ class UserStorie(models.Model):
     total_hours_app_worked = models.CharField(max_length=5, default='0')
     collaborator_who_estimated = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='estimated')#usuario logueado
     collaborator_who_developed = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='developed')
+    history_date_time = models.CharField(max_length=90,blank=True, null=True)
     date_time = models.CharField(max_length=90,blank=True, null=True)
 
 class WorkReport(models.Model):
